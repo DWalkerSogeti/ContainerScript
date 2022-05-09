@@ -1,3 +1,5 @@
+Source of original repo: https://github.com/andrew-kelleher/azurecontainerregistry-cleanup
+
 # Azure Container Registry Cleanup
 To maintain the size of your Azure Container Registry you should reguarly delete old images. This script leverages Azure's **az acr repository** command to scan for and delete surplus images.
 
