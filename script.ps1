@@ -1,4 +1,4 @@
-## Funtion for removing containers
+## Funtion for removing containers, needs to be put ahead of the other
 Function DeleteStorageContainer  
 {  
     Write-Host -ForegroundColor Red "Deleting empty container " $container.Name       
