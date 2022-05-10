@@ -8,27 +8,31 @@ Function ShowStorageContainer
     # Iterate containers, display properties
     Foreach ($container in $containers) 
     {
-    $containerProperties = $container.BlobContainerClient.GetProperties()
-        Write-Host $container.Name "Properties:"
-        $containerProperties.Value
+        $blobs = Get-AzStorageBlob -Context $context -Container $container.Name
+        Write-Host $container.Name "found..."
     }
 
 }
 
 ShowStorageContainer
 
-## Input Parameters
-$name=read-host "Enter container to delete..." 
-$containerName=($name)
+## Input Parameters 
+
 
 ## Function to delete a container  
 Function DeleteStorageContainer  
 {  
-    Write-Host -ForegroundColor Green "Deleting the storage container $containerName"       
+    Write-Host -ForegroundColor Green "Deleting the storage container ($container.Name)"       
     ## Delete a container  
-    Remove-AzStorageContainer -Container $containerName -Context $Context -Confirm
+    Remove-AzStorageContainer -Container $container.Name -Context $Context
 }
-  
-DeleteStorageContainer
+
+if ($blobs.count -ge 1) {
+    $true
+} else {
+    $false
+    DeleteStorageContainer
+}
+
 
 ShowStorageContainer
