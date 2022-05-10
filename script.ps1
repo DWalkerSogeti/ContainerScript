@@ -1,24 +1,25 @@
-################# Azure Blob Storage - PowerShell ####################  
+## Funtion for removing containers
 Function DeleteStorageContainer  
 {  
-    Write-Host -ForegroundColor Green "Deleting empty container " $container.Name       
+    Write-Host -ForegroundColor Red "Deleting empty container " $container.Name       
     ## Delete a container  
     Remove-AzStorageContainer -Container $container.Name -Context $Context
 }
-## Showing list of containers
+## Showing list of containers, then for each container run blob argument against it and remove if greater than or equal 1
 Function StorageContainer
 {
-    Write-Host -ForegroundColor Green "Retreiving container list..."  
+    Write-Host -ForegroundColor Blue "Retreiving container list..."
+    Get-AzStorageContainer -Context $Context  
     $containers = Get-AzStorageContainer -Context $Context
     # Iterate containers, display properties
     Foreach ($container in $containers) 
     {
         $blobs = Get-AzStorageBlob -Context $Context -Container $container.Name
         if ($blobs.count -ge 1) {
-            Write-Host $container.Name "is not empty, it contains" $blobs.Name.count "files!" 
+            Write-Host -ForegroundColor Green $container.Name "is not empty, it contains" $blobs.Name.count "files!" 
             Write-Host "Skipping..."
         } else {
-            Write-Host $container.Name "has no files, deleting..."
+            Write-Host -ForegroundColor Yellow $container.Name "has no files, deleting..."
             DeleteStorageContainer
         }
     }
@@ -26,5 +27,6 @@ Function StorageContainer
 }
 
 StorageContainer
-Write-Host "Containers remaining after cleanup:"
+
+Write-Host -ForegroundColor Green "Containers remaining after cleanup:"
 Get-AzStorageContainer -Context $Context
