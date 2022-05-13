@@ -9,7 +9,7 @@ Function DeleteStorageContainer
 Function StorageContainer
 {
     Write-Host -ForegroundColor Blue "Retreiving container list..."
-    Get-AzStorageContainer -Context $Context  
+    Get-AzStorageContainer -Context $Context
     $containers = Get-AzStorageContainer -Context $Context
     # Iterate containers, display properties
     Foreach ($container in $containers) 
@@ -27,6 +27,6 @@ Function StorageContainer
 }
 
 StorageContainer
-
+Write-Host "Script complete! (👍 ͡❛ ͜ʖ ͡❛)👍"
 Write-Host -ForegroundColor Green "Containers remaining after cleanup:"
 Get-AzStorageContainer -Context $Context
