@@ -27,6 +27,6 @@ Function StorageContainer
 }
 
 StorageContainer
-Write-Host "Script complete! (👍 ͡❛ ͜ʖ ͡❛)👍"
-Write-Host -ForegroundColor Green "Containers remaining after cleanup:"
+Write-Host -ForegroundColor Blue "Script complete!"
+Write-Host -ForegroundColor Blue "Containers remaining after cleanup:"
 Get-AzStorageContainer -Context $Context
