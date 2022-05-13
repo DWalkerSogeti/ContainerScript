@@ -1,7 +1,7 @@
 ## Funtion for removing containers, needs to be put ahead of the other
 Function DeleteStorageContainer  
 {  
-    Write-Host -ForegroundColor Red "Deleting empty container " $container.Name       
+    Write-Host -ForegroundColor Red $container.Name "has been removed successfully!"
     ## Delete a container  
     Remove-AzStorageContainer -Container $container.Name -Context $Context
 }
